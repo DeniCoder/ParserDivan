@@ -1,13 +1,14 @@
-import time
 import csv
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 url = 'https://www.divan.ru/krasnodar/category/promo-neshytochnaya?in_stock=1&categories%5B%5D=2210'
-driver = webdriver.Firefox()
+driver = webdriver.Chrome()
 driver.get(url)
-time.sleep(5)
-sale = driver.find_elements(By.CLASS_NAME,'lsooF')
+wait = WebDriverWait(driver, 10)
+sale = wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'lsooF')))
 data = []
 
 for item in sale:
